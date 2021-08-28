@@ -1,3 +1,28 @@
+variable "headless" {
+  type    = string
+  default = "true"
+}
+
+variable "shutdown_command" {
+  type    = string
+  default = "sudo /sbin/halt -p"
+}
+
+variable "version" {
+  type    = string
+  default = "8.4-2105"
+}
+
+variable "url" {
+  type    = string
+  default = "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.4-x86_64-dvd1.iso"
+}
+
+variable "checksum" {
+  type    = string
+  default = "ffe2fae67da6702d859cfb0b321561a5d616ce87a963d8a25b018c9c3d52d9a4"
+}
+
 source "virtualbox-iso" "virtualbox" {
   boot_command           = ["<tab> text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"]
   disk_size              = "100000"
@@ -43,29 +68,4 @@ build {
   post-processor "vagrant" {
     output = "Rocky-${var.version}-x86_64-${source.name}.box"
   }
-}
-
-variable "headless" {
-  type    = string
-  default = "true"
-}
-
-variable "shutdown_command" {
-  type    = string
-  default = "sudo /sbin/halt -p"
-}
-
-variable "version" {
-  type    = string
-  default = "8.4-2105"
-}
-
-variable "url" {
-  type    = string
-  default = "https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.4-x86_64-dvd1.iso"
-}
-
-variable "checksum" {
-  type    = string
-  default = "ffe2fae67da6702d859cfb0b321561a5d616ce87a963d8a25b018c9c3d52d9a4"
 }
